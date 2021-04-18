@@ -1,24 +1,57 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_custom_crm_visit_form" model="ir.ui.view">
-        <field name="name">view.custom.crm.visit.form</field>
-        <field name="model">custom_crm.visit</field>
-        <field name="arch" type="xml">
-            <form string="Visit">
-                <sheet>
-                    <group name="group_top">
-                        <group name="group_left">
-                            <field name="customer" />
-                            <field name="date" />
-                            <field name="type" />
+    <data>
+        <record id="view_custom_crm_visit_form" model="ir.ui.view">
+            <field name="name">view.custom.crm.visit.form</field>
+            <field name="model">custom_crm.visit</field>
+            <field name="arch" type="xml">
+                <form string="Visit">
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="customer" />
+                                <field name="date" />
+                                <field name="type" />
+                            </group>
+                            <group name="group_right">
+                                <field name="name" />
+                                <field name="done" />
+                            </group>
                         </group>
-                        <group name="group_right">
-                            <field name="name" />
-                            <field name="done" />
-                        </group>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
+                    </sheet
+                </form>
+            </field>
+        </record>
+
+        <record id="view_custom_crm_visit_tree" model="ir.ui.view">
+            <field name="name">view.custom.crm.visit.tree</field>
+            <field name="model">custom_crm.visit</field>
+            <field name="arch" type="xml">
+                <tree string="Visit">
+                    <field name="customer" />
+                    <field name="name" />
+                    <field name="type" />
+                    <field name="date" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_custom_crm_visit_view" name="ir.actions.act_window">
+            <field name="name">Visit</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">custom_crm.visit</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Visits
+                </p>
+                <p>
+                    Click 'New' to add new elements
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_custom_crm_root" name="Custom CRM" sequence="10" />
+        <menuitem id="menu_custom_crm_visit_categ" name="Operations" parent="menu_custom_crm_root" sequence="0" />
+        <menuitem id="menu_custom_crm_visit" name="Visits" parent="menu_custom_crm_visit_categ" sequence="0" action="action_custom_crm_visit_view" />
+    </data>
 </odoo>
