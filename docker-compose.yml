@@ -1,0 +1,30 @@
+version: '3'
+
+services: 
+    web:
+        image: odoo:14.0
+        container_name: odoo_14
+        depends_on: 
+            - db
+        ports: 
+            - 9000:8069
+        volumes: 
+            - ./data/odoo:/var/lib/odoo
+            - ./config:/etc/odoo
+            - ./addons:/mnt/extra
+            - ./enterprise:/mnt/enterprise
+        environment: 
+            - HOST=db
+            - USER=odoo14
+            - PASSWORD=odoo14
+    db:
+        image: postgres:10
+        container_name: postgres_10
+        ports: 
+            - 5432:5432
+        volumes: 
+            - ./data/postgres:/var/lib/postgresql/data
+        environment: 
+            - POSTGRES_PASSWORD=odoo14
+            - POSTGRES_USER=odoo14
+            - POSTGRES_DB=postgres

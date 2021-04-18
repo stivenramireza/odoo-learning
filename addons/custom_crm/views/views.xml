@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_custom_crm_visit_form" model="ir.ui.view">
+        <field name="name">view.custom.crm.visit.form</field>
+        <field name="model">custom_crm.visit</field>
+        <field name="arch" type="xml">
+            <form string="Visit">
+                <sheet>
+                    <group name="group_top">
+                        <group name="group_left">
+                            <field name="customer" />
+                            <field name="date" />
+                            <field name="type" />
+                        </group>
+                        <group name="group_right">
+                            <field name="name" />
+                            <field name="done" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
