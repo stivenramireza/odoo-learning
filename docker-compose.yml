@@ -9,21 +9,19 @@ services:
         ports: 
             - 9000:8069
         volumes: 
-            - ./data/odoo:/var/lib/odoo
             - ./config:/etc/odoo
-            - ./addons:/mnt/extra
+            - ./addons:/mnt/extra-addons
             - ./enterprise:/mnt/enterprise
         environment: 
             - HOST=db
             - USER=odoo14
             - PASSWORD=odoo14
+        command: odoo -u all -i sale_management,stock,purchase,contacts -d odoo --dev all
     db:
         image: postgres:10
         container_name: postgres_10
         ports: 
             - 5432:5432
-        volumes: 
-            - ./data/postgres:/var/lib/postgresql/data
         environment: 
             - POSTGRES_PASSWORD=odoo14
             - POSTGRES_USER=odoo14
