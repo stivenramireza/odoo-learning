@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        string="Visit report"
+        id="custom_crm_visit_report"
+        model="custom_crm.visit"
+        report_type="qweb-pdf"
+        name="custom_crm.report_visit_card"
+        file="custom_crm.report_visit_card"
+        attachment_use="True"
+    />
+</odoo>

@@ -8,6 +8,8 @@
     'version': '0.1',
     'depends': ['base'],
     'data': [
-        'views/views.xml'
+        'views/views.xml',
+        'views/templates.xml',
+        'reports/visit.xml'
     ]
 }
