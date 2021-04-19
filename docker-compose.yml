@@ -11,12 +11,11 @@ services:
         volumes: 
             - ./config:/etc/odoo
             - ./addons:/mnt/extra-addons
-            - ./enterprise:/mnt/enterprise
         environment: 
             - HOST=db
             - USER=odoo14
             - PASSWORD=odoo14
-        command: odoo -u all -i sale_management,stock,purchase,contacts -d odoo --dev all
+        command: odoo -c /etc/odoo/odoo.conf -d odoo --dev=all
     db:
         image: postgres:10
         container_name: postgres_10
