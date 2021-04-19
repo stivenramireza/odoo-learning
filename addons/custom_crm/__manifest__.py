@@ -11,5 +11,8 @@
         'views/views.xml',
         'views/templates.xml',
         'reports/visit.xml'
+    ],
+    'demo': [
+        'demo/demo.xml'
     ]
 }
