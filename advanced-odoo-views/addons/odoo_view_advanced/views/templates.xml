@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <template id="button_render_js" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script src="odoo_view_advanced/static/src/js/action_call.js" type="text/javascript"/>
+            </xpath>
+        </template>
+        <template id="custom_style" name="custom_style_template" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/odoo_view_advanced/static/src/css/style.css"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,267 @@
+<odoo>
+    <data>
+
+        <!-- Tree view -->
+        <record id="view_odoo_view_advanced_custom_item_tree" model="ir.ui.view">
+            <field name="name">view.odoo.view.advanced.custom.item.tree</field>
+            <field name="model">odoo_view_advanced.custom_item</field>
+            <field name="arch" type="xml">
+                <tree string="Product">
+                    <field name="name"/>
+                    <field name="unit_price"/>
+                    <field name="stock"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Graph view -->
+        <record id="view_item_graph" model="ir.ui.view">
+            <field name="name">view.item.graph</field>
+            <field name="model">odoo_view_advanced.custom_item</field>
+            <field name="arch" type="xml">
+                <graph type="pie" string="Stock">
+                    <field name="category" type="row" />
+                    <field name="stock" type="measure" />
+                </graph>
+            </field>
+        </record>
+
+        <!-- Form view -->
+        <record id="view_odoo_view_advanced_custom_item_form" model="ir.ui.view">
+            <field name="name">view.odoo.view.advanced.custom.item.form</field>
+            <field name="model">odoo_view_advanced.custom_item</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="name"/>
+                                <field name="customer" domain="[('phone', '=', '(870)-931-0505')]" />
+                            </group>
+                            <group name="group_right">
+                                <field name="unit_price"/>
+                                <field name="type"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Task form view 1 -->
+        <record id="view_task_form" model="ir.ui.view">
+            <field name="name">view.task.form</field>
+            <field name="model">odoo_view_advanced.task</field>
+            <field name="arch" type="xml">
+                <form string="task">
+                    <header>
+                        <button name="toggle_state" type="object" class="oe_stat_button"
+                                string="Change to done" icon="fa-play-circle"
+                        />
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="name" />
+                            </group>
+                            <group name="group_right" col="4">
+                                <field name="start_date" />
+                                <field name="end_date" />
+                                <field name="done" />
+                            </group>
+                        </group>
+                        <separator string="Separator" />
+                        <group>
+                            <notebook>
+                                <page string="Page 1">
+                                    
+                                </page>
+                                <page string="Page 2">
+                                    
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Task form view 2-->
+        <record id="view_task_form_aux" model="ir.ui.view">
+            <field name="name">view.task.form.aux</field>
+            <field name="model">odoo_view_advanced.task</field>
+            <field name="priority" eval="15"/>
+            <field name="arch" type="xml">
+                <form string="Task">
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="name" />
+                            </group>
+                            <group name="group_right" col="4">
+                                <field name="start_date" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Calendar view -->
+        <record id="view_task_calendar" model="ir.ui.view">
+            <field name="name">view.task.calendar</field>
+            <field name="model">odoo_view_advanced.task</field>
+            <field name="arch" type="xml">
+                <calendar 
+                    string="Tasks" 
+                    date_start="start_date" 
+                    date_stop="end_date"
+                    event_open_popup="true"
+                    mode="month"
+                    color="name"
+                    quick_add="True"
+                >
+                    <field name="name" />
+                </calendar>
+            </field>
+        </record>
+
+        <!-- Action to open models views-->
+        <record model="ir.actions.act_window" id="odoo_view_advanced_custom_item">
+            <field name="name">Product</field>
+            <field name="res_model">odoo_view_advanced.custom_item</field>
+            <field name="view_mode">tree,form,graph</field>
+            <!-- <field name="context">{'default_type': 'S'}</field> -->
+            <!-- <field name="context">{'group_by': 'type'}</field> -->
+            <!-- <field name="context">{'create': False}</field> -->
+            <!-- <field name="domain">[('type', '=', 'S')]</field> -->
+        </record>
+
+        <record model="ir.actions.act_window" id="odoo_view_advanced_custom_task">
+            <field name="name">Task</field>
+            <field name="res_model">odoo_view_advanced.task</field>
+            <field name="view_mode">tree,form,calendar</field>
+        </record>
+        
+        <record id="wizard_import_file_view" model="ir.ui.view">
+            <field name="name">Import file</field>
+            <field name="model">odoo_view_advanced.upload_file</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <group>
+                        <field name="upload_file" filename="file_name" />
+                        <field name="file_name" invisible="1" />
+                    </group>
+                    <footer>
+                        <button name="import_file" string="Import file" class="oe_right oe_highlight" type="object" />
+                        <button special="cancel" string="Cancel" class="oe_right" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="odoo_view_advanced_file_import_wizard">
+            <field name="name">Import file</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">odoo_view_advanced.upload_file</field>
+            <field name="view_id" ref="wizard_import_file_view" />
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="res_partner_kanban_sales_view" model="ir.ui.view">
+            <field name="name">res.partner.kanban.sales.view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.res_partner_kanban_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_kanban_details d-flex flex-column']/ul/li[last()]" position="after">
+                    <li class="text-danger font-weight-bold text-red">
+                        <field name="phone" />
+                    </li>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- 
+        <record id="customer_rank_smart_button" model="ir.ui.view">
+            <field name="name">customer.rank.smart.button</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" type="object" name="get_items" icon="fa-sitemap">
+                        <field string="Products" name="customer_rank" widget="statinfo" />
+                    </button>
+                </div>
+            </field>
+        </record> -->
+
+        <record id="view_sales_order_form" model="ir.ui.view">
+            <field name="name">view.sales.order.form</field>
+            <field name="model">odoo_view_advanced.order</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" clickable="True" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="lines" widget="one2many_list">
+                                <tree>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="unit_price"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="odoo_view_advanced_custom_sales_order">
+            <field name="name">Order</field>
+            <field name="res_model">odoo_view_advanced.order</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Higher menu item  -->
+        <menuitem name="Advanced views" id="odoo_view_advanced.menu_root"/>
+
+        <!-- Menu categories -->
+        <menuitem name="Views" id="odoo_view_advanced.menu_1" parent="odoo_view_advanced.menu_root"/>
+
+        <!-- Menu actions -->
+        <menuitem name="Product" id="odoo_view_advanced.menu_product" parent="odoo_view_advanced.menu_1"
+                  action="odoo_view_advanced_custom_item"/>
+
+        <menuitem name="Import file" id="odoo_view_advanced.menu_import_file" parent="odoo_view_advanced.menu_1"
+                  action="odoo_view_advanced_file_import_wizard"/>
+
+        <menuitem name="Order" id="odoo_view_advanced.menu_order" parent="odoo_view_advanced.menu_1"
+                  action="odoo_view_advanced_custom_sales_order"/>
+
+        <menuitem name="Task" id="odoo_view_advanced.menu_task" parent="odoo_view_advanced.menu_1"
+                  action="odoo_view_advanced_custom_task"/>
+
+        <!-- Add element to own menu -->
+        <menuitem 
+            name="Customers" 
+            id="odoo_view_advanced.menu_customers" 
+            parent="odoo_view_advanced.menu_1"
+            action="account.res_partner_action_customer"
+        />
+
+        <!-- Add element to external menu -->
+        <menuitem 
+            name="Tasks" 
+            id="odoo_view_advanced.menu_tasks" 
+            parent="sale.sale_menu_root"
+            action="odoo_view_advanced_custom_task"
+        />
+
+    </data>
+</odoo>
